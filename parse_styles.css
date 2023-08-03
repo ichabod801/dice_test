@@ -1,0 +1,133 @@
+/* This would become general style */
+
+:root {
+	--base-color: #62733d;
+	--base-dark: #344029;
+	--base-light: #a3a651;
+	--base-very-light: white;
+	--base-second: #254159;
+	--base-second-light: #5082b8;
+	--base-third: #a66226;
+}
+
+body {
+	background-color: lightgrey;
+	font-family: arial, san-serif;
+}
+
+button {
+	height: 35px;
+	font-size: 15px;
+	background-color: var(--base-second-light);
+	color: var(--base-very-light);
+}
+
+button:hover {
+	background-color: var(--base-second);
+}
+
+.crit {
+	font-weight: bold;
+	color: var(--base-third);
+}
+
+.fumble {
+	color: var(--base-very-light);
+}
+
+.panel {
+	border: 1px solid var(--base-second);
+	border-radius: 10px;
+	overflow: hidden;
+	margin: 5px;
+	display: inline-block;
+	vertical-align: top;
+	background-color: white;
+	color: var(--base-dark);
+}
+
+.panel-30 {
+	width: calc(30% - 25px);
+}
+
+.panel-40 {
+	width: calc(40% - 25px);
+}
+
+.panel-50 {
+	width: calc(50% - 25px);
+}
+
+.panel-60 {
+	width: calc(60% - 25px);
+}
+
+.panel-header {
+	border-bottom: 1px solid var(--base-second);
+	/*border-radius: 8px 8px 0px 0px;*/
+	background-clip: padding-box;
+	background-color: var(--base-color);
+	color: var(--base-very-light);
+	margin: 0px;
+	padding: 5px;
+}
+
+.panel-header h1, .panel-header h2, .panel-header h3, .panel-header h4, .panel-header h5 {
+	margin: 0px;
+} 
+
+.panel-content {
+	padding: 5px;
+}
+
+.panel-footer {
+	border-top: 1px solid var(--base-second);
+	border-radius: 0px 0px 10px 10px;
+	background-color: var(--base-light);
+	margin: 0px;
+	padding: 5px;
+}
+
+.panel-footer h1, .panel-footer h2, .panel-footer h3, .panel-footer h4, .panel-footer h5 {
+	margin: 0px;
+}
+
+.pill {
+	border-radius: 5px;
+	border: 1px solid var(--base-second);
+	max-width: max-content;
+	display: flex;
+}
+
+.pill > * {
+	border-radius: 0px;
+	margin: 0px;
+}
+
+.pill > :first-child {
+	border-radius: 5px 0px 0px 5px;
+}
+
+.pill > :last-child {
+	border-radius: 0px 5px 5px 0px;
+}
+
+.wrapper {
+	margin: auto;
+}
+
+.wrapper {
+	width: 80%;
+}
+
+/* This is style specific to this test. */
+
+.pill-die {
+	width: 80%;
+	max-width: none;
+	margin: auto;
+}
+
+.quarter {
+	width: 25%;
+}

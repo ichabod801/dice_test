@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+		<meta name="description" content="insert_description"/>
+		<title>Dice Parsing Test</title>
+		<script
+			  src="https://code.jquery.com/jquery-3.7.0.js"
+			  integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM="
+			  crossorigin="anonymous"></script>
+		<script src="mersenne_twister.js"></script>
+		<script src="parseTest.js" defer></script>
+    	<link rel="stylesheet" href="parse_styles.css"/>
+	</head>
+	<body>
+		<div class="wrapper wrapper-80">
+		<div class="panel panel-40" id="dice-panel">
+			<h2 class="panel-header">Dice Roller</h2>
+			<div class="panel-content">
+				<div class="pill pill-die">
+					<button class="quarter button-die" id="d20">d20</button>
+					<button class="quarter button-die" id="2d20k1">d20 adv</button>
+					<button class="quarter button-die" id="2d20h1">d20 dis</button>
+					<input type="text" class="quarter" tabindex="2" id="modifier">
+				</div>
+				<div class="pill pill-die">
+					<button class="quarter button-die" id="1d4">1d4</button>
+					<button class="quarter button-die" id="2d4">2d4</button>
+					<button class="quarter button-die" id="3d4">3d4</button>
+					<button class="quarter button-die" id="4d4">4d4</button>
+				</div>
+				<div class="pill pill-die">
+					<button class="quarter button-die" id="1d6">1d6</button>
+					<button class="quarter button-die" id="2d6">2d6</button>
+					<button class="quarter button-die" id="3d6">3d6</button>
+					<button class="quarter button-die" id="4d6">4d6</button>
+				</div>
+				<div class="pill pill-die">
+					<button class="quarter button-die" id="1d8">1d8</button>
+					<button class="quarter button-die" id="2d8">2d8</button>
+					<button class="quarter button-die" id="3d8">3d8</button>
+					<button class="quarter button-die" id="4d8">4d8</button>
+				</div>
+				<div class="pill pill-die">
+					<button class="quarter button-die" id="1d10">1d10</button>
+					<button class="quarter button-die" id="2d10">2d10</button>
+					<button class="quarter button-die" id="3d10">3d10</button>
+					<button class="quarter button-die" id="4d10">4d10</button>
+				</div>
+				<div class="pill pill-die">
+					<button class="quarter button-die" id="1d12">1d12</button>
+					<button class="quarter button-die" id="2d12">2d12</button>
+					<button class="quarter button-die" id="3d12">3d12</button>
+					<button class="quarter button-die" id="4d12">4d12</button>
+				</div>
+				<div class="pill pill-die">
+					<button class="quarter button-die" id="1d20">1d20</button>
+					<button class="quarter button-die" id="2d20">2d20</button>
+					<button class="quarter button-die" id="3d20">3d20</button>
+					<button class="quarter button-die" id="4d20">4d20</button>
+				</div>
+				<div class="pill pill-die">
+					<button class="quarter button-die" id="1d100">d%</button>
+					<button class="quarter button-die" id="yes-no">Yes/No</button>
+					<button class="quarter button-die" id="direction">Direction</button>
+					<button class="quarter button-die" id="likert">Likert</button>
+				</div>
+				<div class="pill pill-die">
+					<input type="text" style="width: 75%" tabindex="1" id="roll-text">
+					<button class="quarter" id="from-input">Roll</button>
+				</div>
+				<div class="pill pill-die">
+					<button class="quarter recent-die" draggable="True" id="recent-1">
+						TBD
+					</button>
+					<button class="quarter recent-die" draggable="True" id="recent-2">
+						TBD
+					</button>
+					<button class="quarter recent-die" draggable="True" id="recent-3">
+						TBD
+					</button>
+					<button class="quarter recent-die" draggable="True" id="recent-4">
+						TBD
+					</button>
+				</div>
+				<div class="pill pill-die">
+					<button class="quarter saved-die" id="saved-1">TBD</button>
+					<button class="quarter saved-die" id="saved-2">TBD</button>
+					<button class="quarter saved-die" id="saved-3">TBD</button>
+					<button class="quarter saved-die" id="saved-4">TBD</button>
+				</div>
+			</div>
+			<div class="panel-footer" id="output">
+				<p class="dummy-result">Come on, roll something, I dare you.</p>
+			</div>
+		</div>
+		<div class="panel panel-60" id="init-panel">
+			<div class="panel-header">
+				<h2 id="init-header">Instructions</h2>
+			</div>
+			<div class="panel-content">
+				<p>
+					In general, you press a button and it rolls the roll on the button. The
+					'd20 adv' and 'd20 dis' buttons are for advantage and disadvantage. The 
+					d% button rolls 1-100, Yes/No is just a random yes or no, Direction is one
+					of eight random compass directions, and Likert is a random value on a
+					five point Likert scale from 'Strongly Against' to 'Strongly For'.
+				</p>
+				<p>
+					The text entry box in the top right adds a modifier to all of the 
+					numerical rolls above the other text entry box. You can enter a value
+					as normal, or you can use the scroll wheel to increase or decrease the
+					value. Double clicking on the value deletes it.
+				</p>
+				<p>
+					You can combine rolls with the shift and alt key. If you shift-click on
+					a basic roll button, it adds the roll to the previous roll. If you 
+					alt-click on a basic roll button, it subtracts the roll from the 
+					previous roll.
+				</p>
+				<p>
+					The larger text entry box near the bottom allows you to enter in more
+					complicated dice rolls. It can handle addition, subtraction, division,
+					multiplication, powers, modulo, and parentheses for dice rolls and 
+					integers.
+				</p>
+				<p>
+					The basic syntax for a die roll in NdS, where N is the number of dice
+					and S is how many sides each die has. For example, 3d6 would be three
+					six-sided dice. If N is not supplied, it is assumed to be one. The syntax 
+					also allows for up to four modifiers to the die roll, each consisting of 
+					a letter and a numeric value. The letters for the modifiers are:
+				</p>
+				<dl>
+					<dt>d</dt>
+					<dd>Drop a number of the lowest dice equal to the value.</dd>
+					<dt>h</dt>
+					<dd>Hold a number of the lowest dice equal to the value.</dd>
+					<dt>k</dt>
+					<dd>Keep a number of the highest dice equal to the value.</dd>
+					<dt>p</dt>
+					<dd>Pop (remove) a number of the higest dice equal to the value.</dd>
+					<dt>c</dt>
+					<dd>Count any roll equal to or higher than the value as a critical.</dd>
+					<dt>f</dt>
+					<dd>Count any roll equal to or lower than the value as a fumble.</dd>
+					<dt>r</dt>
+					<dd>Reroll (once) any roll equal to or lower than the value.</dd>
+					<dt>e</dt>
+					<dd>
+						For each die in the original roll equal to or higher than the value,
+						roll another die and add it to the total. This is often called 
+						exploding dice.
+					</dd>
+				</dl>
+				<p>
+					The last two rows of buttons (that start with 'TBD') are the recent rolls
+					and the saved rolls. The first row of TBD buttons is the last four rolls 
+					made, not counting non-numeric rolls and immeditately repeated rolls. You 
+					can save these rolls to one of the recent rolls or by dragging a recent 
+					roll button onto one of the saved roll buttons, or by control-clicking on
+					a recent roll.
+				</p>
+				<p>
+					The display at the bottom will show you the last five rolls. Criticals
+					will be shown in red, and fumbles in white. You can hover over a result
+					to see what dice were rolled to get the result.
+				</p>
+			</div>
+		</div>
+		</div>
+	</body>
+</html>
